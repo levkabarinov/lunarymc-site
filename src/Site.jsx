@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowUpRight, Sparkles, Pickaxe, Trophy, Coins, Users, ShieldCheck, ShoppingBag, Gamepad2, ChevronDown, Menu, X, Zap, Globe2, Blocks } from 'lucide-react';
+import { ArrowUpRight, Sparkles, Pickaxe, Trophy, Coins, Users, ShieldCheck, ShoppingBag, Gamepad2, ChevronDown, Menu, X, Zap, Globe2, Blocks, Share2 } from 'lucide-react';
 
 const APP_URL = 'https://lunarymc-miniapp.vercel.app';
 const REPO_URL = 'https://github.com/levkabarinov/lunarymc-miniapp';
@@ -18,6 +18,7 @@ const features = [
 function Site() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [faqOpen, setFaqOpen] = React.useState(0);
+  const [shareMessage, setShareMessage] = React.useState('');
   const [authOpen, setAuthOpen] = React.useState(false);
   const [authMode, setAuthMode] = React.useState('register');
   const [authUsername, setAuthUsername] = React.useState('');
@@ -82,6 +83,35 @@ function Site() {
     setAuthNotice('Ты вышел из аккаунта.');
     setAuthError('');
   }
+
+  async function shareProject() {
+    const url = window.location.origin + window.location.pathname;
+    const shareData = {
+      title: 'LunaryMC',
+      text: 'Залетай в LunaryMC — Minecraft-проект с профилем, достижениями и Lunary Points!',
+      url,
+    };
+    setShareMessage('');
+    try {
+      if (navigator.share && (!navigator.canShare || navigator.canShare(shareData))) {
+        await navigator.share(shareData);
+        setShareMessage('Спасибо, что делишься LunaryMC!');
+      } else if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(url);
+        setShareMessage('Ссылка на LunaryMC скопирована!');
+      } else {
+        setShareMessage('Скопируй ссылку из адресной строки браузера.');
+      }
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+      try {
+        await navigator.clipboard.writeText(url);
+        setShareMessage('Ссылка на LunaryMC скопирована!');
+      } catch {
+        setShareMessage('Скопируй ссылку из адресной строки браузера.');
+      }
+    }
+  }
   const faqs = [
     ['Что такое LunaryMC?', 'LunaryMC — проект вокруг Minecraft, который объединяет игровой профиль, достижения, рейтинг, магазин и систему Lunary Points.'],
     ['Зачем связывать Minecraft-аккаунт?', 'Привязка помогает связать игровой профиль с Mini App и использовать доступные функции проекта.'],
@@ -105,7 +135,8 @@ function Site() {
           <div className="status-pill"><span className="status-dot"></span> MINECRAFT COMMUNITY PROJECT</div>
           <h1>ТВОЙ МИР.<br/><span>ТВОИ ПРАВИЛА.</span></h1>
           <p className="hero-copy">Больше, чем Minecraft. Развивай профиль, открывай достижения, зарабатывай Lunary Points и собирай свой игровой путь в одном месте.</p>
-          <div className="hero-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Создать аккаунт <ArrowUpRight size={17}/></button><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a></div>
+          <div className="hero-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Создать аккаунт <ArrowUpRight size={17}/></button><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a><button className="btn btn-ghost share-button" type="button" onClick={shareProject}><Share2 size={16}/> Поделиться</button></div>
+          {shareMessage && <p className="share-message" role="status">{shareMessage}</p>}
           <div className="hero-note"><span><Sparkles size={14}/> Единая система прогресса</span><i></i><span><Globe2 size={14}/> Мир LunaryMC</span></div>
         </div>
         <div className="hero-art" aria-hidden="true">
