@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090816">
+<meta name="description" content="Lunary Notes — личные заметки и задачи, которые сохраняются в браузере.">
+<title>Lunary Notes — твои идеи и задачи</title>
+<style>
+:root{color-scheme:dark;--bg:#090816;--panel:#15132a;--line:#ffffff18;--muted:#aaa5c4;--text:#f7f4ff;--purple:#a78bfa;--green:#8fe0b8}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -12%,#704cde3b,transparent 48%),var(--bg);color:var(--text);font:14px Inter,system-ui,Segoe UI,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1050px,calc(100% - 32px));margin:auto}
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.14em}.moon{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#a78bfa,#596ce8);font-size:20px}.back{color:#c8c0e5;font-size:12px}
+.hero{padding:48px 0 25px}.tag{display:inline-block;border:1px solid #a78bfa44;border-radius:99px;padding:7px 11px;color:#d8ccff;background:#a78bfa12;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+h1{font-size:clamp(38px,7vw,58px);line-height:1;letter-spacing:-.06em;margin:16px 0 12px}.grad{background:linear-gradient(100deg,#fff,#c7b5ff 55%,#83a8ff);color:transparent;background-clip:text}.lead{max-width:600px;color:var(--muted);line-height:1.7;margin:0}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:24px 0 16px}.tabs{display:flex;gap:7px;flex-wrap:wrap}.tab,.btn{border:1px solid var(--line);border-radius:10px;background:#ffffff08;color:#d9d2ed;padding:10px 13px;font:inherit;font-size:11px;font-weight:750;cursor:pointer}.tab.active,.btn.primary{background:linear-gradient(110deg,#8c6af0,#637ce9);border-color:transparent;color:white}.btn:hover,.tab:hover{border-color:#b49aff}
+.search{flex:1;min-width:180px;max-width:300px;border:1px solid var(--line);border-radius:10px;background:#ffffff08;color:white;padding:11px 13px;font:inherit;font-size:12px;outline:none}.search:focus,textarea:focus,input:focus{border-color:#a78bfa;box-shadow:0 0 0 3px #a78bfa20}
+.layout{display:grid;grid-template-columns:330px 1fr;gap:14px;align-items:start}.panel{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#191632,#111020);padding:18px;min-width:0}.panel h2{font-size:14px;margin:0 0 14px}
+.form{display:grid;gap:11px}.form input,.form textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#090816;color:white;padding:12px;font:inherit;font-size:12px;outline:none}.form textarea{min-height:130px;resize:vertical;line-height:1.6}.form-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.hint{color:#77728f;font-size:10px;line-height:1.6;margin:2px 0 0}
+.list-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.list-head h2{margin:0}.count{color:#a99bd5;font-size:10px}
+.items{display:grid;gap:9px}.item{border:1px solid var(--line);border-radius:13px;padding:14px;background:#ffffff05;display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:10px;align-items:start}.item.done{opacity:.62}.item.done .item-title{text-decoration:line-through;color:#aaa5c4}.check{width:18px;height:18px;accent-color:#9b7af6;margin:2px 0 0;cursor:pointer}.item-title{font-size:12px;font-weight:800;overflow-wrap:anywhere}.item-body{font-size:11px;color:var(--muted);line-height:1.65;margin-top:6px;white-space:pre-wrap;overflow-wrap:anywhere}.item-date{font-size:9px;color:#77728f;margin-top:8px}.item-actions{display:flex;gap:5px}.icon-btn{width:28px;height:28px;border:1px solid var(--line);border-radius:8px;background:#ffffff08;color:#bdb5d7;cursor:pointer}.icon-btn:hover{border-color:#a78bfa;color:white}.empty{padding:36px 16px;text-align:center;color:#8e89a6;font-size:12px;line-height:1.7;border:1px dashed #ffffff20;border-radius:13px}
+.footer-note{margin:17px 0 45px;border:1px solid #a78bfa2d;background:#a78bfa0c;border-radius:13px;padding:13px 15px;color:var(--muted);font-size:10px;line-height:1.7}.footer-note strong{color:#e7e0ff}
+.toast{min-height:16px;color:var(--green);font-size:10px;margin-top:8px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.search{max-width:none;flex-basis:100%}.hero{padding-top:38px}}
+@media(max-width:480px){header{height:64px}.toolbar{align-items:stretch}.tabs{width:100%}.tab{flex:1}.panel{padding:14px}.item{grid-template-columns:20px minmax(0,1fr) auto}}
+</style>
+</head>
+<body>
+<header class="wrap"><a class="brand" href="../hub/"><span class="moon">☾</span>LUNARY</a><a class="back" href="../hub/">← Назад в Hub</a></header>
+<main class="wrap">
+<section class="hero"><span class="tag">Personal workspace · 01</span><h1><span class="grad">Lunary</span> Notes.</h1><p class="lead">Собирай идеи, записывай планы и отмечай выполненные задачи. Всё сохраняется локально в этом браузере.</p></section>
+<div class="toolbar"><div class="tabs" role="tablist" aria-label="Фильтр записей"><button class="tab active" data-filter="all">Все</button><button class="tab" data-filter="notes">Заметки</button><button class="tab" data-filter="tasks">Задачи</button></div><input class="search" id="search" type="search" placeholder="Поиск по записям..." aria-label="Поиск по записям"></div>
+<section class="layout">
+<aside class="panel"><h2 id="formTitle">Новая запись</h2><form class="form" id="entryForm"><input id="title" maxlength="80" placeholder="Заголовок" required><textarea id="body" maxlength="3000" placeholder="Текст заметки или описание задачи..."></textarea><div class="form-actions"><button class="btn primary" type="submit" id="saveBtn">Сохранить</button><button class="btn" type="button" id="cancelBtn" hidden>Отмена</button></div><p class="hint">До 80 символов в заголовке и до 3000 в тексте.</p></form><div class="toast" id="toast" role="status" aria-live="polite"></div></aside>
+<section class="panel"><div class="list-head"><h2>Твои записи</h2><span class="count" id="count">0 записей</span></div><div class="items" id="items"></div><div class="form-actions" style="margin-top:14px"><button class="btn" id="exportBtn" type="button">Экспорт JSON ↓</button><button class="btn" id="importBtn" type="button">Импорт JSON ↑</button><input id="importFile" type="file" accept="application/json,.json" hidden></div></section>
+</section>
+<p class="footer-note"><strong>Конфиденциальность:</strong> записи хранятся только в localStorage этого браузера на этом устройстве. Они не отправляются на сервер и не синхронизируются между устройствами. Для резервной копии используй экспорт JSON.</p>
+</main>
+<script>
+(()=>{
+const KEY='lunary_notes_v1';
+const $=id=>document.getElementById(id);
+let entries=[],filter='all',editing=null;
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(saved))entries=saved.filter(x=>x&&typeof x.id==='string'&&typeof x.title==='string');}catch{}
+function persist(){localStorage.setItem(KEY,JSON.stringify(entries));render()}
+function safeDate(v){try{return new Date(v).toLocaleString('ru-RU',{dateStyle:'medium',timeStyle:'short'})}catch{return ''}}
+function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+ const q=$('search').value.trim().toLowerCase();
+ const shown=entries.filter(x=>(filter==='all'||(filter==='notes'&&x.type==='note')||(filter==='tasks'&&x.type==='task'))&&((x.title+' '+(x.body||'')).toLowerCase().includes(q)));
+ $('count').textContent=shown.length+' '+(shown.length===1?'запись':shown.length<5?'записи':'записей');
+ $('items').innerHTML=shown.length?shown.map(x=>'<article class="item '+(x.done?'done':'')+'"><input class="check" type="checkbox" data-done="'+escapeHTML(x.id)+'" '+(x.done?'checked':'')+' aria-label="Отметить выполненным"><div><div class="item-title">'+(x.type==='task'?'☑ ':'✎ ')+escapeHTML(x.title)+'</div>'+(x.body?'<div class="item-body">'+escapeHTML(x.body)+'</div>':'')+'<div class="item-date">'+(x.type==='task'?'Задача':'Заметка')+' · '+safeDate(x.updated||x.created)+'</div></div><div class="item-actions"><button class="icon-btn" data-edit="'+escapeHTML(x.id)+'" aria-label="Изменить">✎</button><button class="icon-btn" data-delete="'+escapeHTML(x.id)+'" aria-label="Удалить">×</button></div></article>').join(''):'<div class="empty">Пока здесь пусто.<br>Добавь первую заметку или задачу слева.</div>';
+}
+function resetForm(){editing=null;$('entryForm').reset();$('formTitle').textContent='Новая запись';$('saveBtn').textContent='Сохранить';$('cancelBtn').hidden=true}
+$('entryForm').addEventListener('submit',e=>{
+ e.preventDefault();const title=$('title').value.trim(),body=$('body').value.trim();if(!title)return;
+ if(editing){const x=entries.find(x=>x.id===editing);if(x){x.title=title;x.body=body;x.updated=new Date().toISOString()}}
+ else entries.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(16).slice(2),title,body,type:filter==='tasks'?'task':'note',done:false,created:new Date().toISOString()});
+ persist();resetForm();$('toast').textContent='Запись сохранена.';setTimeout(()=>$('toast').textContent='',2200);
+});
+$('items').addEventListener('click',e=>{
+ const edit=e.target.closest('[data-edit]');if(edit){const x=entries.find(x=>x.id===edit.dataset.edit);if(!x)return;editing=x.id;$('title').value=x.title;$('body').value=x.body||'';$('formTitle').textContent='Изменить запись';$('saveBtn').textContent='Сохранить изменения';$('cancelBtn').hidden=false;window.scrollTo({top:0,behavior:'smooth'});return}
+ const del=e.target.closest('[data-delete]');if(del){const x=entries.find(x=>x.id===del.dataset.delete);if(!x||!confirm('Удалить запись «'+x.title+'»?'))return;entries=entries.filter(x=>x.id!==del.dataset.delete);persist();if(editing===del.dataset.delete)resetForm();$('toast').textContent='Запись удалена.'}
+});
+$('items').addEventListener('change',e=>{const c=e.target.closest('[data-done]');if(!c)return;const x=entries.find(x=>x.id===c.dataset.done);if(x){x.done=c.checked;x.updated=new Date().toISOString();persist()}});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===b));render()}));
+$('search').addEventListener('input',render);$('cancelBtn').addEventListener('click',resetForm);
+$('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({app:'Lunary Notes',version:1,exportedAt:new Date().toISOString(),entries},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='lunary-notes-backup.json';a.click();URL.revokeObjectURL(url);$('toast').textContent='Резервная копия подготовлена.'});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text()),incoming=Array.isArray(data)?data:data.entries;if(!Array.isArray(incoming))throw new Error();if(!confirm('Импорт заменит текущие записи. Продолжить?'))return;entries=incoming.filter(x=>x&&typeof x.title==='string').map(x=>({id:typeof x.id==='string'?x.id:String(Date.now())+Math.random(),title:x.title.slice(0,80),body:typeof x.body==='string'?x.body.slice(0,3000):'',type:x.type==='task'?'task':'note',done:!!x.done,created:x.created||new Date().toISOString(),updated:x.updated||x.created||new Date().toISOString()}));persist();$('toast').textContent='Импорт завершён.'}catch{$('toast').textContent='Не удалось прочитать этот JSON-файл.'}finally{e.target.value=''}});
+render();
+})();
+</script>
+</body></html>
