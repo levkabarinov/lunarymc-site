@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090816">
+<meta name="description" content="Центр помощи Lunary: быстрые ссылки, ответы и диагностика доступа к сервисам.">
+<title>Lunary Help — центр помощи</title>
+<style>
+:root{color-scheme:dark;--bg:#090816;--panel:#15132a;--line:#bca8ff25;--muted:#aaa5c4;--text:#f7f4ff;--purple:#a78bfa}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -12%,#704cde40,transparent 48%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(920px,calc(100% - 32px));margin:auto}
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:.14em}.moon{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#a78bfa,#596ce8);font-size:20px}
+nav{display:flex;gap:18px;color:#c8c1e2;font-size:12px}.hero{text-align:center;padding:66px 0 36px}.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:8px 13px;color:#d5caff;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+h1{font-size:clamp(40px,7vw,64px);line-height:1.02;letter-spacing:-.06em;margin:20px 0 13px}.grad{background:linear-gradient(100deg,#fff,#c7b5ff 55%,#83a8ff);color:transparent;background-clip:text}.lead{max-width:620px;margin:auto;color:var(--muted);line-height:1.75;font-size:15px}
+h2{font-size:21px;letter-spacing:-.03em;margin:0 0 15px}.section{margin:28px 0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{border:1px solid var(--line);background:linear-gradient(145deg,#191632,#111020);border-radius:17px;padding:19px}.card h3{font-size:15px;margin:0 0 7px}.card p{font-size:12px;line-height:1.65;color:var(--muted);margin:0 0 13px}.link{color:#cbbaff;font-size:12px;font-weight:750}
+.faq{border:1px solid var(--line);border-radius:16px;background:#15132a;margin:9px 0;overflow:hidden}.faq summary{padding:16px 18px;cursor:pointer;font-size:13px;font-weight:700;list-style:none}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"＋";float:right;color:#cbbaff}.faq[open] summary:after{content:"−"}.answer{padding:0 18px 16px;color:var(--muted);font-size:12px;line-height:1.75}
+.notice{border:1px solid #a78bfa38;background:#a78bfa0d;border-radius:16px;padding:17px;color:var(--muted);font-size:12px;line-height:1.7}.notice strong{color:var(--text)}
+footer{margin-top:48px;border-top:1px solid #ffffff12;padding:22px 0 30px;color:#77728f;font-size:11px;display:flex;justify-content:space-between;gap:12px}
+@media(max-width:580px){.grid{grid-template-columns:1fr}nav{gap:10px;font-size:11px}.hero{padding:52px 0 28px}footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="wrap"><a class="brand" href="../hub/"><span class="moon">☾</span><span>LUNARY</span></a><nav><a href="../hub/">Hub</a><a href="../guide/">Гид</a><a href="https://github.com/levkabarinov/lunarymc-miniapp">GitHub ↗</a></nav></header>
+<main class="wrap">
+<section class="hero"><span class="tag">Lunary support</span><h1><span class="grad">Центр помощи</span></h1><p class="lead">Быстрые переходы и простые подсказки по проектам Lunary. Здесь собраны только доступные адреса и базовая диагностика.</p></section>
+<section class="section"><h2>Быстрые ссылки</h2><div class="grid">
+<article class="card"><h3>☾ Lunary Hub</h3><p>Центральная страница экосистемы.</p><a class="link" href="../hub/">Открыть Hub ↗</a></article>
+<article class="card"><h3>⛏ LunaryMC</h3><p>Основной сайт игрового проекта.</p><a class="link" href="https://levkabarinov.github.io/lunarymc-site/">Открыть LunaryMC ↗</a></article>
+<article class="card"><h3>▦ Lunary Mini App</h3><p>Веб-приложение LunaryMC.</p><a class="link" href="https://lunarymc-miniapp.vercel.app/">Открыть Mini App ↗</a></article>
+<article class="card"><h3>⌘ VPN Client — исходники</h3><p>Код Windows-клиента и история изменений.</p><a class="link" href="https://github.com/levkabarinov/lunarymc-miniapp/tree/main/desktop-vpn">Открыть папку проекта ↗</a></article>
+</div></section>
+<section class="section"><h2>Частые вопросы</h2>
+<details class="faq"><summary>Страница не открывается. Что проверить?</summary><div class="answer">Обнови страницу, проверь адрес и попробуй открыть её в другом браузере. Если GitHub Pages только что обновился, публикация может ещё выполняться.</div></details>
+<details class="faq"><summary>Mini App не загружается?</summary><div class="answer">Проверь подключение к интернету и попробуй открыть Mini App по прямой ссылке в браузере. Если появляется код ошибки, сохрани его и текст сообщения для диагностики.</div></details>
+<details class="faq"><summary>Где скачать Lunary VPN Client?</summary><div class="answer">Клиент Windows находится в ранней разработке. Не запускай старые сборки, если они показывают ошибку. Проверяй только установщик из актуального релиза или проверенной сборки проекта.</div></details>
+<details class="faq"><summary>Все карточки в Hub уже работают?</summary><div class="answer">Нет. В Hub часть карточек обозначает планы развития. Текущий статус конкретного продукта указан в его карточке; не считай раздел «В планах» готовым сервисом.</div></details>
+</section>
+<section class="section"><div class="notice"><strong>Важно о безопасности.</strong> Не отправляй никому пароли, приватные ключи, VPN-ссылки подписки или конфигурационные файлы. Для сообщения об ошибке достаточно скриншота без личных данных и текста ошибки.</div></section>
+</main>
+<footer class="wrap"><span>☾ LUNARY — центр помощи</span><span>Help · 2026</span></footer>
+</body>
+</html>
