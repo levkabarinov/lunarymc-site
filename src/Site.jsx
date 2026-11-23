@@ -3,6 +3,8 @@ import { ArrowUpRight, Sparkles, Pickaxe, Trophy, Coins, Users, ShieldCheck, Sho
 
 const APP_URL = 'https://lunarymc-miniapp.vercel.app';
 const REPO_URL = 'https://github.com/levkabarinov/lunarymc-miniapp';
+const WEB_API = 'https://lunarymc-miniapp.vercel.app/api/web';
+const AUTH_STORAGE_KEY = 'lunarymc_site_session';
 
 const features = [
   { icon: Pickaxe, title: 'Minecraft-интеграция', text: 'Свяжи игровой аккаунт с профилем LunaryMC и следи за своим прогрессом.' },
@@ -16,7 +18,70 @@ const features = [
 function Site() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [faqOpen, setFaqOpen] = React.useState(0);
+  const [authOpen, setAuthOpen] = React.useState(false);
+  const [authMode, setAuthMode] = React.useState('register');
+  const [authUsername, setAuthUsername] = React.useState('');
+  const [authPassword, setAuthPassword] = React.useState('');
+  const [authUser, setAuthUser] = React.useState(null);
+  const [authToken, setAuthToken] = React.useState('');
+  const [authBusy, setAuthBusy] = React.useState(false);
+  const [authError, setAuthError] = React.useState('');
+  const [authNotice, setAuthNotice] = React.useState('');
   const closeMenu = () => setMenuOpen(false);
+  const openAuth = (mode = 'register') => {
+    setAuthMode(mode);
+    setAuthError('');
+    setAuthNotice('');
+    setAuthOpen(true);
+    closeMenu();
+  };
+
+  React.useEffect(() => {
+    const token = window.localStorage.getItem(AUTH_STORAGE_KEY);
+    if (!token) return;
+    fetch(WEB_API + '/me', { headers: { Authorization: 'Bearer ' + token } })
+      .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.detail || 'Сессия истекла.');
+        setAuthToken(token);
+        setAuthUser(data.user);
+      })
+      .catch(() => window.localStorage.removeItem(AUTH_STORAGE_KEY));
+  }, []);
+
+  async function submitAuth(event) {
+    event.preventDefault();
+    setAuthBusy(true);
+    setAuthError('');
+    setAuthNotice('');
+    try {
+      const response = await fetch(WEB_API + '/' + authMode, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: authUsername, password: authPassword }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.detail || 'Не удалось выполнить запрос.');
+      window.localStorage.setItem(AUTH_STORAGE_KEY, data.token);
+      setAuthToken(data.token);
+      setAuthUser(data.user);
+      setAuthPassword('');
+      setAuthNotice(authMode === 'register' ? 'Аккаунт создан. Добро пожаловать в LunaryMC!' : 'Ты успешно вошёл в аккаунт.');
+    } catch (error) {
+      setAuthError(error.message || 'Не удалось подключиться к серверу.');
+    } finally {
+      setAuthBusy(false);
+    }
+  }
+
+  function logout() {
+    window.localStorage.removeItem(AUTH_STORAGE_KEY);
+    setAuthToken('');
+    setAuthUser(null);
+    setAuthPassword('');
+    setAuthNotice('Ты вышел из аккаунта.');
+    setAuthError('');
+  }
   const faqs = [
     ['Что такое LunaryMC?', 'LunaryMC — проект вокруг Minecraft, который объединяет игровой профиль, достижения, рейтинг, магазин и систему Lunary Points.'],
     ['Зачем связывать Minecraft-аккаунт?', 'Привязка помогает связать игровой профиль с Mini App и использовать доступные функции проекта.'],
@@ -28,6 +93,7 @@ function Site() {
       <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Открыть меню">{menuOpen ? <X/> : <Menu/>}</button>
       <nav className={menuOpen ? 'nav nav-open' : 'nav'}>
         <a href="#features" onClick={closeMenu}>Возможности</a><a href="#points" onClick={closeMenu}>Lunary Points</a><a href="#about" onClick={closeMenu}>О проекте</a><a href="#faq" onClick={closeMenu}>FAQ</a>
+        <button className="nav-account" type="button" onClick={() => openAuth(authUser ? 'login' : 'register')}>{authUser ? authUser.username : 'Войти / регистрация'}</button>
         <a className="nav-cta" href={APP_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Открыть Mini App <ArrowUpRight size={16}/></a>
       </nav>
     </header>
@@ -39,7 +105,7 @@ function Site() {
           <div className="status-pill"><span className="status-dot"></span> MINECRAFT COMMUNITY PROJECT</div>
           <h1>ТВОЙ МИР.<br/><span>ТВОИ ПРАВИЛА.</span></h1>
           <p className="hero-copy">Больше, чем Minecraft. Развивай профиль, открывай достижения, зарабатывай Lunary Points и собирай свой игровой путь в одном месте.</p>
-          <div className="hero-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a></div>
+          <div className="hero-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Создать аккаунт <ArrowUpRight size={17}/></button><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a></div>
           <div className="hero-note"><span><Sparkles size={14}/> Единая система прогресса</span><i></i><span><Globe2 size={14}/> Мир LunaryMC</span></div>
         </div>
         <div className="hero-art" aria-hidden="true">
@@ -65,9 +131,46 @@ function Site() {
 
       <section className="section faq-section" id="faq"><div className="section-heading"><div><span className="eyebrow">NEED TO KNOW</span><h2>ЧАСТЫЕ <em>ВОПРОСЫ</em></h2></div><p>Коротко о главном.</p></div><div className="faq-list">{faqs.map(([q,a],i)=><button className={'faq-item '+(faqOpen===i?'faq-active':'')} key={q} onClick={()=>setFaqOpen(faqOpen===i?-1:i)}><span className="faq-question"><b>0{i+1}</b>{q}</span><span className="faq-plus">{faqOpen===i?'−':'+'}</span>{faqOpen===i&&<p>{a}</p>}</button>)}</div></section>
 
-      <section className="final-cta"><div className="cta-stars">✦　　✧　　 ✦</div><span className="eyebrow">YOUR JOURNEY STARTS HERE</span><h2>ГОТОВ ОТКРЫТЬ<br/><em>МИР LUNARYMC?</em></h2><p>Твой профиль и возможности проекта уже ждут тебя.</p><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={18}/></a></section>
+      <section className="final-cta"><div className="cta-stars">✦　　✧　　 ✦</div><span className="eyebrow">YOUR JOURNEY STARTS HERE</span><h2>ГОТОВ ОТКРЫТЬ<br/><em>МИР LUNARYMC?</em></h2><p>Твой профиль и возможности проекта уже ждут тебя.</p><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Регистрация на сайте</button></section>
     </main>
     <footer className="footer"><a className="brand" href="#top"><span className="brand-mark"><span>✦</span></span><span>LUNARY<span className="brand-light">MC</span><small>MINECRAFT PROJECT</small></span></a><span>© {new Date().getFullYear()} LUNARYMC. НЕОФИЦИАЛЬНЫЙ ФАН-ПРОЕКТ.</span><a href={REPO_URL} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14}/></a></footer>
+
+    {authOpen && <div className="auth-backdrop" onMouseDown={event => { if (event.target === event.currentTarget) setAuthOpen(false); }}>
+      <section className="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title">
+        <button className="auth-close" type="button" onClick={() => setAuthOpen(false)} aria-label="Закрыть">×</button>
+        <span className="eyebrow">LUNARYMC ACCOUNT</span>
+        {authUser ? <>
+          <div className="auth-success-mark">✦</div>
+          <h2 id="auth-title">Привет, {authUser.username}!</h2>
+          <p className="auth-description">Ты вошёл в веб-аккаунт LunaryMC.</p>
+          <div className="auth-account-row"><span>Логин</span><b>{authUser.username}</b></div>
+          <div className="auth-account-row"><span>Регистрация</span><b>{authUser.created_at ? new Date(authUser.created_at * 1000).toLocaleDateString('ru-RU') : '—'}</b></div>
+          <p className="auth-note">Этот веб-аккаунт пока отдельный от авторизации Telegram Mini App.</p>
+          {authNotice && <p className="auth-notice">{authNotice}</p>}
+          <div className="auth-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={16}/></a><button className="btn btn-ghost" type="button" onClick={logout}>Выйти</button></div>
+        </> : <>
+          <h2 id="auth-title">{authMode === 'register' ? 'Создать аккаунт' : 'С возвращением'}</h2>
+          <p className="auth-description">{authMode === 'register' ? 'Зарегистрируйся на сайте LunaryMC.' : 'Войди в свой аккаунт LunaryMC.'}</p>
+          <div className="auth-tabs">
+            <button type="button" className={authMode === 'register' ? 'active' : ''} onClick={() => { setAuthMode('register'); setAuthError(''); setAuthNotice(''); }}>Регистрация</button>
+            <button type="button" className={authMode === 'login' ? 'active' : ''} onClick={() => { setAuthMode('login'); setAuthError(''); setAuthNotice(''); }}>Войти</button>
+          </div>
+          <form className="auth-form" onSubmit={submitAuth}>
+            <label>Логин
+              <input value={authUsername} onChange={event => setAuthUsername(event.target.value)} autoComplete="username" minLength={3} maxLength={20} pattern="[A-Za-z0-9_]+" placeholder="Например, LunaryPlayer" required/>
+            </label>
+            <label>Пароль
+              <input type="password" value={authPassword} onChange={event => setAuthPassword(event.target.value)} autoComplete={authMode === 'register' ? 'new-password' : 'current-password'} minLength={8} maxLength={128} placeholder="Не менее 8 символов" required/>
+            </label>
+            <p className="auth-note">Используй отдельный пароль, не тот, который стоит на других сервисах. Восстановление пароля пока не настроено.</p>
+            {authMode === 'register' && <p className="auth-note">Сейчас это отдельный аккаунт сайта. Вход в Telegram Mini App пока остаётся отдельным.</p>}
+            {authError && <p className="auth-error" role="alert">{authError}</p>}
+            {authNotice && <p className="auth-notice">{authNotice}</p>}
+            <button className="btn btn-primary auth-submit" type="submit" disabled={authBusy}>{authBusy ? 'Подключаемся…' : authMode === 'register' ? 'Зарегистрироваться' : 'Войти в аккаунт'} <ArrowUpRight size={16}/></button>
+          </form>
+        </>}
+      </section>
+    </div>}
   </div>;
 }
 export default Site;
