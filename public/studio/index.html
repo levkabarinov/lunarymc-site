@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#090816">
+<meta name="description" content="Lunary Studio — визуальный редактор градиентов и фонов."><title>Lunary Studio — Gradient Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#090816;--panel:#14122a;--line:#ffffff18;--muted:#aaa5c4;--text:#f7f4ff;--violet:#a78bfa}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#7655c833,transparent 48%),var(--bg);color:var(--text);font:14px Inter,system-ui,Segoe UI,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+header{height:74px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:.15em;display:flex;align-items:center;gap:10px}.moon{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#9b7aff,#5a69e9);font-size:20px}.back{color:#c8c0e5;font-size:12px}
+.hero{padding:48px 0 26px}.eyebrow{color:#cfc3ff;font-size:10px;letter-spacing:.16em;text-transform:uppercase}.hero h1{font-size:clamp(36px,6vw,58px);letter-spacing:-.06em;margin:12px 0}.hero p{color:var(--muted);line-height:1.7;max-width:620px;margin:0}
+.layout{display:grid;grid-template-columns:1.35fr .85fr;gap:18px;padding-bottom:65px}.panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#191632,#101020);padding:18px;min-width:0}
+.preview{height:390px;border-radius:15px;position:relative;overflow:hidden;background:linear-gradient(135deg,#7655e8,#23b5c8);box-shadow:inset 0 0 0 1px #ffffff22}.preview:after{content:"LUNARY STUDIO";position:absolute;bottom:22px;left:24px;font-size:11px;letter-spacing:.28em;font-weight:800;color:#ffffffa8;text-shadow:0 2px 15px #0005}
+.preview-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:#d8d2ec;font-size:12px}.live{color:#9de6c2;font-size:10px;letter-spacing:.1em}
+h2{font-size:15px;margin:0 0 17px}.controls{display:grid;gap:17px}.field{display:grid;gap:9px}.fieldtop{display:flex;justify-content:space-between;align-items:center;color:#d7d1e9;font-size:12px}.value{font-variant-numeric:tabular-nums;color:#bcaeff}
+.colors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.colorbox{border:1px solid var(--line);border-radius:12px;padding:10px;background:#ffffff06}.colorbox label{display:block;font-size:11px;color:var(--muted);margin-bottom:8px}.colorrow{display:flex;align-items:center;gap:9px}.colorrow input{width:42px;height:34px;border:0;padding:0;background:none;cursor:pointer}.hex{font:12px ui-monospace,monospace;color:#eee9ff}
+input[type=range]{width:100%;accent-color:#a78bfa}.presets{display:flex;flex-wrap:wrap;gap:8px}.preset{border:1px solid var(--line);background:#ffffff08;color:#d9d2ed;border-radius:99px;padding:8px 11px;font-size:11px;cursor:pointer}.preset:hover,.preset:focus-visible{border-color:#b49aff;color:white}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}.btn{border:1px solid var(--line);background:#ffffff0b;color:#f5f1ff;border-radius:11px;padding:11px 13px;font-weight:700;font-size:11px;cursor:pointer}.btn.primary{background:linear-gradient(110deg,#8c6af0,#637ce9);border:0}.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.code{margin-top:17px;background:#090816;border:1px solid var(--line);border-radius:12px;padding:13px;color:#cfc5f4;font:11px/1.7 ui-monospace,monospace;overflow-wrap:anywhere;min-height:58px}
+.toast{color:#9de6c2;font-size:11px;min-height:15px;margin-top:8px}
+footer{border-top:1px solid var(--line);padding:20px 0 30px;color:#77728f;font-size:11px;display:flex;justify-content:space-between;gap:12px}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.preview{height:300px}}@media(max-width:480px){header{height:64px}.hero{padding:38px 0 22px}.panel{padding:14px}.preview{height:230px}.colors{grid-template-columns:1fr 1fr}footer{flex-direction:column}}
+</style></head><body>
+<header class="wrap"><a class="brand" href="../hub/"><span class="moon">☾</span>LUNARY</a><a class="back" href="../hub/">← Назад в Hub</a></header>
+<main class="wrap"><section class="hero"><div class="eyebrow">Creative tools · 01</div><h1>Lunary <span style="background:linear-gradient(100deg,#c9b8ff,#83a8ff);color:transparent;background-clip:text">Studio.</span></h1><p>Твоя мини-лаборатория визуального стиля. Собирай градиенты, настраивай цвета и угол, копируй CSS или сохраняй готовый фон в PNG. Всё работает прямо в браузере.</p></section>
+<section class="layout">
+<div class="panel"><div class="preview-head"><span>ПРЕДПРОСМОТР</span><span class="live">● LIVE</span></div><div class="preview" id="preview"></div><div class="field" style="margin-top:16px"><div class="fieldtop"><span>Готовые палитры</span><span class="value">PRESETS</span></div><div class="presets">
+<button class="preset" data-preset="violet">Nebula</button><button class="preset" data-preset="ocean">Deep Ocean</button><button class="preset" data-preset="sunset">Afterglow</button><button class="preset" data-preset="mint">Cyber Mint</button><button class="preset" data-preset="ember">Ember</button>
+</div></div></div>
+<div class="panel"><h2>Настройки градиента</h2><div class="controls">
+<div class="colors"><div class="colorbox"><label for="c1">Цвет 01</label><div class="colorrow"><input id="c1" type="color" value="#7655e8"><span class="hex" id="h1">#7655E8</span></div></div><div class="colorbox"><label for="c2">Цвет 02</label><div class="colorrow"><input id="c2" type="color" value="#23b5c8"><span class="hex" id="h2">#23B5C8</span></div></div></div>
+<div class="field"><div class="fieldtop"><label for="angle">Угол градиента</label><span class="value" id="angleValue">135°</span></div><input id="angle" type="range" min="0" max="360" value="135"></div>
+<div class="field"><div class="fieldtop"><label for="blend">Положение перехода</label><span class="value" id="blendValue">50%</span></div><input id="blend" type="range" min="15" max="85" value="50"></div>
+<div class="field"><div class="fieldtop"><span>Действия</span><span class="value">EXPORT</span></div><div class="actions"><button class="btn primary" id="copy">Копировать CSS</button><button class="btn" id="png">Скачать PNG</button><button class="btn" id="random">Случайный стиль ↻</button></div><div class="code" id="css"></div><div class="toast" id="toast" aria-live="polite"></div></div>
+</div></div>
+</section></main><footer class="wrap"><span>☾ LUNARY STUDIO — Gradient Lab</span><span>Локальный инструмент · без регистрации</span></footer>
+<script>
+const $=id=>document.getElementById(id), presets={violet:['#7655e8','#23b5c8',135,50],ocean:['#102a70','#25c4c9',125,56],sunset:['#ff6b8a','#ffbd69',35,48],mint:['#00a896','#b8f2e6',145,52],ember:['#471a63','#f06a4d',115,44]};
+function update(){const a=$('c1').value,b=$('c2').value,angle=+$('angle').value,blend=+$('blend').value;const css='linear-gradient('+angle+'deg, '+a+' 0%, '+b+' '+blend+'%)';$('preview').style.background=css;$('h1').textContent=a.toUpperCase();$('h2').textContent=b.toUpperCase();$('angleValue').textContent=angle+'°';$('blendValue').textContent=blend+'%';$('css').textContent='background: '+css+';';}
+['c1','c2','angle','blend'].forEach(id=>$(id).addEventListener('input',update));
+document.querySelectorAll('[data-preset]').forEach(btn=>btn.addEventListener('click',()=>{const p=presets[btn.dataset.preset];$('c1').value=p[0];$('c2').value=p[1];$('angle').value=p[2];$('blend').value=p[3];update();}));
+$('copy').addEventListener('click',async()=>{const text=$('css').textContent;try{await navigator.clipboard.writeText(text);$('toast').textContent='CSS скопирован в буфер обмена.'}catch(e){$('toast').textContent='Не удалось скопировать автоматически — выдели CSS вручную.'}});
+$('random').addEventListener('click',()=>{const hue1=Math.floor(Math.random()*360),hue2=(hue1+80+Math.floor(Math.random()*150))%360;$('c1').value=hsl(hue1,72,58);$('c2').value=hsl(hue2,72,58);$('angle').value=Math.floor(Math.random()*361);$('blend').value=35+Math.floor(Math.random()*31);update();$('toast').textContent='Создана новая комбинация.'});
+function hsl(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>Math.round(255*(l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1))))).toString(16).padStart(2,'0');return '#'+f(0)+f(8)+f(4)}
+$('png').addEventListener('click',()=>{const canvas=document.createElement('canvas');canvas.width=1600;canvas.height=900;const ctx=canvas.getContext('2d'),angle=+$('angle').value*Math.PI/180,dx=Math.cos(angle)*1000,dy=Math.sin(angle)*1000,g=ctx.createLinearGradient(800-dx/2,450-dy/2,800+dx/2,450+dy/2);g.addColorStop(0,$('c1').value);g.addColorStop(+$('blend').value/100,$('c2').value);g.addColorStop(1,$('c2').value);ctx.fillStyle=g;ctx.fillRect(0,0,1600,900);ctx.fillStyle='#ffffffaa';ctx.font='700 24px Arial';ctx.letterSpacing='8px';ctx.fillText('LUNARY STUDIO',72,820);const link=document.createElement('a');link.download='lunary-gradient.png';link.href=canvas.toDataURL('image/png');link.click();$('toast').textContent='PNG подготовлен и сохранён.'});
+update();
+</script></body></html>
