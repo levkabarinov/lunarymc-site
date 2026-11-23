@@ -34,3 +34,20 @@
 .share-button:hover{border-color:#b8a0ff;background:#8b5cf62b;color:#fff}
 .share-message{margin:12px 0 0;color:#b8f0d1;font-size:11px;font-weight:700;letter-spacing:.2px;animation:share-in .25s ease-out}
 @keyframes share-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Lunary ecosystem directory */
+.ecosystem-section{padding-top:35px}
+.ecosystem-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.ecosystem-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-height:235px;padding:22px;border:1px solid #ffffff14;border-radius:16px;background:linear-gradient(145deg,#19172d,#10111f);transition:transform .22s,border-color .22s,background .22s;overflow:hidden}
+.ecosystem-card:after{content:"";position:absolute;width:150px;height:150px;right:-85px;bottom:-100px;border-radius:50%;background:#8b5cf6;filter:blur(55px);opacity:.12;pointer-events:none}
+.ecosystem-card:hover{transform:translateY(-5px);border-color:#9b7af677;background:linear-gradient(145deg,#211b3b,#111322)}
+.ecosystem-featured{border-color:#9b7af655;background:linear-gradient(145deg,#211b3b,#111322)}
+.ecosystem-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#8b5cf624;color:#d4c5ff;font-size:20px}
+.ecosystem-status{margin-top:18px;color:#a99bd5;font-size:9px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.ecosystem-card h3{margin:8px 0 7px;font-size:17px;letter-spacing:-.3px}
+.ecosystem-card p{margin:0;color:#9692a9;font-size:11px;line-height:1.8;max-width:290px}
+.ecosystem-link{display:inline-flex;align-items:center;gap:7px;margin-top:auto;padding-top:17px;color:#c6b5ff;font-size:10px;font-weight:800}
+.ecosystem-card:hover .ecosystem-link{color:#fff}
+@media(max-width:850px){.ecosystem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.ecosystem-section{padding-top:20px}.ecosystem-grid{grid-template-columns:1fr;gap:10px}.ecosystem-card{min-height:205px;padding:19px}}
