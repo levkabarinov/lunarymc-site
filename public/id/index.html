@@ -1,63 +1,64 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090914">
-<meta name="description" content="Lunary ID — единый профиль экосистемы Lunary.">
-<title>Lunary ID — единый профиль</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090914"><meta name="description" content="Lunary ID — единый профиль экосистемы Lunary.">
+<title>Lunary ID — твой профиль</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#090914;--panel:#111225;--line:#ffffff12;--muted:#9899b6;--purple:#a78bfa;--cyan:#67e8f9}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#34215d66,transparent 42%),radial-gradient(ellipse at 95% 30%,#143b5960,transparent 35%),var(--bg);color:#f7f6ff;font-family:Manrope,system-ui,sans-serif;min-height:100vh}
-a{color:inherit;text-decoration:none}.wrap{max-width:1120px;margin:auto;padding:26px 22px 70px}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:58px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.7px;font-size:19px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#9c7bff,#4b9ce8);display:grid;place-items:center;box-shadow:0 8px 30px #8b5cf655;font-size:24px}.tag{font-size:12px;color:#c4b5fd;border:1px solid #a78bfa44;border-radius:30px;padding:8px 13px;background:#a78bfa12}
-.hero{max-width:720px;margin-bottom:30px}.eyebrow{color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.hero h1{font-size:clamp(38px,7vw,66px);line-height:1.04;letter-spacing:-3px;margin:13px 0}.grad{background:linear-gradient(90deg,#c4b5fd,#67e8f9);color:transparent;background-clip:text}.hero p{color:var(--muted);font-size:15px;line-height:1.8;max-width:600px}
-.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.panel{background:linear-gradient(145deg,#17182ee8,#10111fe8);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 18px 60px #0003}.profile-head{display:flex;align-items:center;gap:15px;margin-bottom:23px}.avatar{width:66px;height:66px;border-radius:21px;background:linear-gradient(140deg,#8b5cf6,#38bdf8);display:grid;place-items:center;font-size:29px;font-weight:900;box-shadow:0 8px 28px #8b5cf644}.profile-head h2{font-size:20px;margin:0 0 4px}.muted{color:var(--muted);font-size:12px}.field{display:block;margin:17px 0}.field span{display:block;color:#c7c6dc;font-size:12px;font-weight:700;margin-bottom:8px}.field input{width:100%;border:1px solid #ffffff18;background:#090a17;color:#fff;border-radius:13px;padding:14px 15px;font:inherit;outline:none}.field input:focus{border-color:#a78bfa}.idrow{display:flex;align-items:center;justify-content:space-between;background:#090a17;border:1px solid var(--line);padding:13px 14px;border-radius:13px;gap:10px}.idrow code{color:#c4b5fd;font-size:13px}.btn{border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(100deg,#8b5cf6,#528be9);color:white;font:700 13px Manrope;cursor:pointer;transition:.2s}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn.secondary{background:#ffffff0d;border:1px solid var(--line)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.section-title h3{margin:0;font-size:16px}.soon{font-size:10px;color:#c4b5fd;background:#a78bfa16;padding:6px 9px;border-radius:20px}.projects{display:grid;gap:11px}.project{display:flex;align-items:center;gap:13px;padding:14px;border:1px solid var(--line);border-radius:16px;background:#ffffff05}.picon{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;font-size:20px;background:#8b5cf61c}.project strong{font-size:13px;display:block}.project small{font-size:11px;color:var(--muted)}.status{margin-left:auto;font-size:10px;color:#a5f3fc;background:#67e8f912;padding:6px 8px;border-radius:20px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:16px}.stat{padding:16px;border:1px solid var(--line);border-radius:16px;background:#ffffff05}.stat b{display:block;font-size:23px;letter-spacing:-1px}.stat span{color:var(--muted);font-size:11px}.notice{margin-top:18px;padding:14px 16px;border:1px solid #67e8f92b;background:#67e8f90a;border-radius:15px;color:#b7dce7;font-size:11px;line-height:1.7}.footer{text-align:center;color:#686982;font-size:11px;margin-top:28px}
-@media(max-width:760px){.layout{grid-template-columns:1fr}.top{margin-bottom:42px}.hero h1{letter-spacing:-2px}.wrap{padding:20px 15px 50px}.panel{padding:19px}}
+:root{color-scheme:dark;--bg:#090914;--panel:#131426;--line:#ffffff14;--muted:#999ab5;--purple:#a78bfa;--cyan:#67e8f9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 12% 0%,#43266a70,transparent 42%),radial-gradient(ellipse at 95% 28%,#174d6860,transparent 35%),var(--bg);color:#f8f7ff;font-family:Manrope,system-ui,sans-serif}button,input{font:inherit}a{color:inherit;text-decoration:none}.wrap{max-width:1120px;margin:auto;padding:25px 22px 65px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:55px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;letter-spacing:-.6px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#a78bfa,#38bdf8);display:grid;place-items:center;font-size:23px;box-shadow:0 8px 28px #8b5cf655}.tag{font-size:10px;letter-spacing:1px;color:#c4b5fd;border:1px solid #a78bfa44;border-radius:30px;padding:8px 12px;background:#a78bfa12}.hero{max-width:730px;margin-bottom:30px}.eyebrow{font-size:10px;color:var(--cyan);letter-spacing:2px;font-weight:900}.hero h1{font-size:clamp(38px,7vw,65px);line-height:1.05;letter-spacing:-3px;margin:13px 0}.grad{background:linear-gradient(90deg,#c4b5fd,#67e8f9);background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:14px;line-height:1.8;max-width:610px}.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.panel{background:linear-gradient(145deg,#191a31ed,#10111fed);border:1px solid var(--line);border-radius:24px;padding:23px;box-shadow:0 18px 60px #0003}.profile-head{display:flex;align-items:center;gap:15px;margin-bottom:22px}.avatar{width:68px;height:68px;border-radius:22px;display:grid;place-items:center;font-size:28px;font-weight:900;background:linear-gradient(140deg,#8b5cf6,#38bdf8);box-shadow:0 8px 28px #8b5cf644;flex:none}.profile-head h2{font-size:19px;margin:0 0 4px}.muted{font-size:11px;color:var(--muted)}.field{display:block;margin:16px 0}.field>span,.field-label{display:block;font-size:10px;letter-spacing:1px;color:#c8c7dc;font-weight:800;margin-bottom:8px}.field input{width:100%;border:1px solid #ffffff18;background:#090a17;color:#fff;border-radius:13px;padding:13px 14px;outline:none;font-size:13px}.field input:focus{border-color:#a78bfa}.counter{text-align:right;color:#777891;font-size:10px;margin-top:5px}.idrow{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#090a17;border:1px solid var(--line);padding:12px 13px;border-radius:13px}.idrow code{color:#c4b5fd;font-size:13px}.btn{border:0;border-radius:12px;padding:12px 16px;background:linear-gradient(100deg,#8b5cf6,#528be9);color:white;font-size:12px;font-weight:800;cursor:pointer;transition:.18s}.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.btn.secondary{background:#ffffff0d;border:1px solid var(--line)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}.swatches{display:flex;gap:9px}.swatch{width:30px;height:30px;border-radius:10px;border:2px solid transparent;cursor:pointer}.swatch.active{outline:2px solid #fff;outline-offset:2px}.progress{height:6px;border-radius:20px;background:#ffffff12;overflow:hidden;margin-top:9px}.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#a78bfa,#67e8f9);transition:width .25s}.completion{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;margin-top:8px}.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.section-title h3{font-size:15px;margin:0}.soon{font-size:9px;color:#c4b5fd;background:#a78bfa16;padding:6px 9px;border-radius:20px;letter-spacing:.6px}.projects{display:grid;gap:10px}.project{display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:15px;background:#ffffff05}.picon{width:41px;height:41px;border-radius:13px;display:grid;place-items:center;font-size:19px;background:#8b5cf61c}.project strong{font-size:12px;display:block}.project small{font-size:10px;color:var(--muted)}.status{margin-left:auto;font-size:9px;color:#a5f3fc;background:#67e8f912;padding:6px 8px;border-radius:20px;white-space:nowrap}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}.stat{padding:14px;border:1px solid var(--line);border-radius:15px;background:#ffffff05}.stat b{display:block;font-size:22px}.stat span{font-size:10px;color:var(--muted)}.notice{margin-top:16px;padding:13px 14px;border:1px solid #67e8f92b;background:#67e8f90a;border-radius:14px;color:#b7dce7;font-size:10px;line-height:1.7}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#20213a;border:1px solid #ffffff22;padding:11px 16px;border-radius:12px;font-size:12px;transition:.2s;box-shadow:0 10px 35px #0008}.toast.show{opacity:1;transform:translate(-50%,0)}.footer{text-align:center;color:#686982;font-size:10px;margin-top:26px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}.top{margin-bottom:40px}.hero h1{letter-spacing:-2px}.wrap{padding:19px 14px 45px}.panel{padding:18px}}
 </style>
 </head>
-<body>
-<div class="wrap">
-<header class="top"><a class="brand" href="../"><span class="logo">☾</span><span>LUNARY <span style="color:#a78bfa">ID</span></span></a><span class="tag">EARLY PREVIEW</span></header>
-<section class="hero"><div class="eyebrow">ONE ACCOUNT · MANY WORLDS</div><h1>Твой мир Lunary.<br><span class="grad">Твой единый профиль.</span></h1><p>Знакомься с Lunary ID — будущим центром твоего аккаунта во всей экосистеме. Настрой профиль и посмотри, как будет выглядеть твой цифровой пропуск.</p></section>
+<body><div class="wrap">
+<header class="top"><a class="brand" href="../"><span class="logo">☾</span><span>LUNARY <span style="color:#a78bfa">ID</span></span></a><span class="tag">EARLY ACCESS · PREVIEW</span></header>
+<section class="hero"><div class="eyebrow">ONE ACCOUNT · MANY WORLDS</div><h1>Твой мир Lunary.<br><span class="grad">Твой единый профиль.</span></h1><p>Настрой свой профиль и познакомься с концепцией единого аккаунта для сервисов Lunary. Здесь будут собраны твои проекты, достижения и цифровые возможности.</p></section>
 <main class="layout">
 <section class="panel">
 <div class="profile-head"><div class="avatar" id="avatar">L</div><div><h2 id="previewName">Новый пользователь</h2><div class="muted">Участник экосистемы Lunary</div></div></div>
-<label class="field"><span>ТВОЙ НИКНЕЙМ</span><input id="nickname" maxlength="20" placeholder="Например, Lunarian"></label>
+<label class="field"><span>НИКНЕЙМ</span><input id="nickname" maxlength="20" autocomplete="nickname" placeholder="Например, Lunarian"><div class="counter"><span id="nameCount">0</span>/20</div></label>
 <label class="field"><span>БУКВА АВАТАРА</span><input id="avatarLetter" maxlength="2" placeholder="L"></label>
-<div class="field"><span>ТВОЙ УНИКАЛЬНЫЙ LUNARY ID</span><div class="idrow"><code id="userId">LNR-000000</code><button class="btn secondary" id="copyId" type="button">Копировать</button></div></div>
-<div class="actions"><button class="btn" id="save" type="button">Сохранить профиль</button><button class="btn secondary" id="reset" type="button">Сбросить</button></div>
-<div class="notice">Это демонстрационная версия: данные профиля сохраняются только в этом браузере. Регистрация, общий аккаунт и синхронизация между сервисами пока не подключены.</div>
+<div class="field"><span class="field-label">ЦВЕТ АВАТАРА</span><div class="swatches" id="swatches">
+<button class="swatch active" type="button" data-color="violet" aria-label="Фиолетовый" style="background:linear-gradient(140deg,#8b5cf6,#38bdf8)"></button>
+<button class="swatch" type="button" data-color="pink" aria-label="Розовый" style="background:linear-gradient(140deg,#ec4899,#8b5cf6)"></button>
+<button class="swatch" type="button" data-color="green" aria-label="Зелёный" style="background:linear-gradient(140deg,#10b981,#67e8f9)"></button>
+<button class="swatch" type="button" data-color="orange" aria-label="Оранжевый" style="background:linear-gradient(140deg,#f97316,#facc15)"></button>
+</div></div>
+<div class="field"><span class="field-label">ТВОЙ УНИКАЛЬНЫЙ LUNARY ID</span><div class="idrow"><code id="userId">LNR-000000</code><button class="btn secondary" id="copyId" type="button">Копировать</button></div></div>
+<div class="completion"><span>Заполнение профиля</span><b id="completionText">0%</b></div><div class="progress"><i id="progressBar"></i></div>
+<div class="actions"><button class="btn" id="save" type="button">Сохранить профиль</button><button class="btn secondary" id="export" type="button">Экспорт данных</button><button class="btn secondary" id="reset" type="button">Сбросить</button></div>
+<div class="notice">Демо-режим: профиль хранится только в локальном хранилище этого браузера. Это пока не регистрация и не настоящий общий аккаунт — серверная авторизация и синхронизация ещё не подключены.</div>
 </section>
 <section class="panel">
-<div class="section-title"><h3>Твоя экосистема</h3><span class="soon">ПЛАНИРУЕТСЯ</span></div>
+<div class="section-title"><h3>Твоя экосистема</h3><span class="soon">ROADMAP</span></div>
 <div class="projects">
 <div class="project"><div class="picon">⛏️</div><div><strong>LunaryMC</strong><small>Minecraft-проект</small></div><span class="status">В планах</span></div>
 <div class="project"><div class="picon">✨</div><div><strong>Lunary Mini App</strong><small>Сервисы и Lunary Points</small></div><span class="status">В планах</span></div>
-<div class="project"><div class="picon">🛡️</div><div><strong>Lunary VPN</strong><small>Защита соединения</small></div><span class="status">В планах</span></div>
-<div class="project"><div class="picon">🤖</div><div><strong>Lunary Bot</strong><small>Твой помощник в Telegram</small></div><span class="status">В планах</span></div>
+<div class="project"><div class="picon">🛡️</div><div><strong>Lunary VPN</strong><small>Клиент для подключения</small></div><span class="status">В планах</span></div>
+<div class="project"><div class="picon">🤖</div><div><strong>Lunary Bot</strong><small>Помощник в Telegram</small></div><span class="status">В планах</span></div>
 </div>
-<div class="stats"><div class="stat"><b>—</b><span>Lunary Points</span></div><div class="stat"><b>0</b><span>Достижения</span></div></div>
-<div class="notice">В будущем здесь появятся баланс, достижения, история активности и подключённые приложения.</div>
+<div class="stats"><div class="stat"><b>—</b><span>Lunary Points · баланс</span></div><div class="stat"><b>0</b><span>Достижения</span></div></div>
+<div class="notice">Следующие этапы концепции: единый вход, привязка проектов, баланс очков, достижения и история активности. Пока эти функции показаны как макет.</div>
 </section>
-</main>
-<div class="footer">LUNARY ID · CONCEPT PREVIEW · © 2026 LUNARY</div>
-</div>
+</main><div class="footer">LUNARY ID · CONCEPT PREVIEW · © 2026 LUNARY</div></div><div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 const $=id=>document.getElementById(id);
+const gradients={violet:'linear-gradient(140deg,#8b5cf6,#38bdf8)',pink:'linear-gradient(140deg,#ec4899,#8b5cf6)',green:'linear-gradient(140deg,#10b981,#67e8f9)',orange:'linear-gradient(140deg,#f97316,#facc15)'};
 const makeId=()=>'LNR-'+Math.floor(100000+Math.random()*900000);
-let profile={};
-try{profile=JSON.parse(localStorage.getItem('lunary-id-profile')||'{}')||{}}catch{}
-if(!profile.id)profile.id=makeId();
-function render(){const name=profile.name||'';const letter=profile.letter||'L';$('nickname').value=name;$('avatarLetter').value=letter;$('previewName').textContent=name.trim()||'Новый пользователь';$('avatar').textContent=(letter.trim()||'L').slice(0,2).toUpperCase();$('userId').textContent=profile.id;}
-$('nickname').addEventListener('input',e=>{$('previewName').textContent=e.target.value.trim()||'Новый пользователь';});
+let profile={};try{profile=JSON.parse(localStorage.getItem('lunary-id-profile')||'{}')||{}}catch{profile={}}
+if(!profile.id)profile.id=makeId();if(!gradients[profile.color])profile.color='violet';
+let toastTimer;
+function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),1900)}
+function render(){const name=profile.name||'',letter=profile.letter||'L';$('nickname').value=name;$('avatarLetter').value=letter;$('previewName').textContent=name||'Новый пользователь';$('avatar').textContent=letter.toUpperCase();$('avatar').style.background=gradients[profile.color];$('userId').textContent=profile.id;$('nameCount').textContent=name.length;document.querySelectorAll('.swatch').forEach(b=>b.classList.toggle('active',b.dataset.color===profile.color));const score=(name?50:0)+(profile.letter&&profile.letter!=='L'?20:10)+(profile.color!=='violet'?30:20);$('completionText').textContent=score+'%';$('progressBar').style.width=score+'%'}
+function save(){profile.name=$('nickname').value.trim().slice(0,20);profile.letter=$('avatarLetter').value.trim().slice(0,2)||'L';localStorage.setItem('lunary-id-profile',JSON.stringify(profile));render();toast('Профиль сохранён на этом устройстве')}
+$('nickname').addEventListener('input',e=>{$('previewName').textContent=e.target.value.trim()||'Новый пользователь';$('nameCount').textContent=e.target.value.length;});
 $('avatarLetter').addEventListener('input',e=>{$('avatar').textContent=(e.target.value.trim()||'L').slice(0,2).toUpperCase();});
-$('save').addEventListener('click',()=>{profile.name=$('nickname').value.trim().slice(0,20);profile.letter=$('avatarLetter').value.trim().slice(0,2)||'L';localStorage.setItem('lunary-id-profile',JSON.stringify(profile));render();$('save').textContent='Сохранено ✓';setTimeout(()=>$('save').textContent='Сохранить профиль',1500);});
-$('reset').addEventListener('click',()=>{profile={id:makeId()};localStorage.removeItem('lunary-id-profile');render();});
-$('copyId').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(profile.id);$('copyId').textContent='Скопировано ✓';setTimeout(()=>$('copyId').textContent='Копировать',1400);}catch{$('copyId').textContent='Не удалось';}});
+$('swatches').addEventListener('click',e=>{const b=e.target.closest('[data-color]');if(!b)return;profile.color=b.dataset.color;$('avatar').style.background=gradients[profile.color];document.querySelectorAll('.swatch').forEach(x=>x.classList.toggle('active',x===b));});
+$('save').addEventListener('click',save);
+$('reset').addEventListener('click',()=>{if(!confirm('Сбросить профиль на этом устройстве?'))return;localStorage.removeItem('lunary-id-profile');profile={id:makeId(),name:'',letter:'L',color:'violet'};render();toast('Профиль сброшен')});
+$('copyId').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(profile.id);toast('Lunary ID скопирован')}catch{const t=document.createElement('textarea');t.value=profile.id;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();toast('Lunary ID скопирован')}});
+$('export').addEventListener('click',()=>{save();const blob=new Blob([JSON.stringify({product:'Lunary ID',version:1,...profile},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='lunary-id-profile.json';a.click();URL.revokeObjectURL(url);toast('Файл профиля подготовлен')});
 render();
-</script>
-</body>
-</html>
+</script></body></html>
