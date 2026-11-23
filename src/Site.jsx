@@ -112,6 +112,10 @@ function Site() {
       }
     }
   }
+  const miniAppUrl = authToken
+    ? APP_URL + '#web_session=' + encodeURIComponent(authToken)
+    : APP_URL;
+
   const faqs = [
     ['Что такое LunaryMC?', 'LunaryMC — проект вокруг Minecraft, который объединяет игровой профиль, достижения, рейтинг, магазин и систему Lunary Points.'],
     ['Зачем связывать Minecraft-аккаунт?', 'Привязка помогает связать игровой профиль с Mini App и использовать доступные функции проекта.'],
@@ -124,7 +128,7 @@ function Site() {
       <nav className={menuOpen ? 'nav nav-open' : 'nav'}>
         <a href="#features" onClick={closeMenu}>Возможности</a><a href="#points" onClick={closeMenu}>Lunary Points</a><a href="#about" onClick={closeMenu}>О проекте</a><a href="#faq" onClick={closeMenu}>FAQ</a>
         <button className="nav-account" type="button" onClick={() => openAuth(authUser ? 'login' : 'register')}>{authUser ? authUser.username : 'Войти / регистрация'}</button>
-        <a className="nav-cta" href={APP_URL} target="_blank" rel="noreferrer" onClick={closeMenu}>Открыть Mini App <ArrowUpRight size={16}/></a>
+        <a className="nav-cta" href={miniAppUrl} target="_blank" rel="noreferrer" onClick={closeMenu}>Открыть Mini App <ArrowUpRight size={16}/></a>
       </nav>
     </header>
 
@@ -135,7 +139,7 @@ function Site() {
           <div className="status-pill"><span className="status-dot"></span> MINECRAFT COMMUNITY PROJECT</div>
           <h1>ТВОЙ МИР.<br/><span>ТВОИ ПРАВИЛА.</span></h1>
           <p className="hero-copy">Больше, чем Minecraft. Развивай профиль, открывай достижения, зарабатывай Lunary Points и собирай свой игровой путь в одном месте.</p>
-          <div className="hero-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Создать аккаунт <ArrowUpRight size={17}/></button><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a><button className="btn btn-ghost share-button" type="button" onClick={shareProject}><Share2 size={16}/> Поделиться</button></div>
+          <div className="hero-actions"><a className="btn btn-primary" href={miniAppUrl} target="_blank" rel="noreferrer">Перейти в Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Создать аккаунт <ArrowUpRight size={17}/></button><a className="btn btn-ghost" href="#features">Узнать больше <ChevronDown size={17}/></a><button className="btn btn-ghost share-button" type="button" onClick={shareProject}><Share2 size={16}/> Поделиться</button></div>
           {shareMessage && <p className="share-message" role="status">{shareMessage}</p>}
           <div className="hero-note"><span><Sparkles size={14}/> Единая система прогресса</span><i></i><span><Globe2 size={14}/> Мир LunaryMC</span></div>
         </div>
@@ -156,13 +160,13 @@ function Site() {
         <div className="feature-grid">{features.map((item, i) => {const Icon=item.icon;return <article className="feature-card" key={item.title}><div className="feature-top"><span className="feature-icon"><Icon size={21}/></span><span className="feature-number">0{i+1}</span></div><h3>{item.title}</h3><p>{item.text}</p><div className="feature-line"></div></article>})}</div>
       </section>
 
-      <section className="points-section" id="points"><div className="points-visual"><div className="coin-halo"></div><div className="coin"><span>✦</span><small>LUNARY</small></div><div className="coin-star star-a">✧</div><div className="coin-star star-b">✦</div></div><div className="points-copy"><span className="eyebrow">YOUR IN-GAME ECONOMY</span><h2>ЗАРАБАТЫВАЙ.<br/><em>ОТКРЫВАЙ.</em><br/>СОБИРАЙ.</h2><p>Lunary Points — внутренняя валюта проекта. Используй очки в магазине, открывай новые возможности и пополняй свою коллекцию.</p><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Заглянуть в магазин <ArrowUpRight size={18}/></a></div></section>
+      <section className="points-section" id="points"><div className="points-visual"><div className="coin-halo"></div><div className="coin"><span>✦</span><small>LUNARY</small></div><div className="coin-star star-a">✧</div><div className="coin-star star-b">✦</div></div><div className="points-copy"><span className="eyebrow">YOUR IN-GAME ECONOMY</span><h2>ЗАРАБАТЫВАЙ.<br/><em>ОТКРЫВАЙ.</em><br/>СОБИРАЙ.</h2><p>Lunary Points — внутренняя валюта проекта. Используй очки в магазине, открывай новые возможности и пополняй свою коллекцию.</p><a className="btn btn-primary" href={miniAppUrl} target="_blank" rel="noreferrer">Заглянуть в магазин <ArrowUpRight size={18}/></a></div></section>
 
       <section className="section about-section" id="about"><div className="about-panel"><div className="about-copy"><span className="eyebrow">WELCOME TO LUNARYMC</span><h2>НЕ ПРОСТО ИГРА.<br/><em>ЦЕЛАЯ ВСЕЛЕННАЯ.</em></h2><p>LunaryMC развивается как единая экосистема для игроков Minecraft. Мы объединяем игровой опыт и цифровые инструменты, чтобы твои достижения не терялись, а прогресс становился частью большой истории.</p><a className="text-link" href={REPO_URL} target="_blank" rel="noreferrer">Проект на GitHub <ArrowUpRight size={16}/></a></div><div className="about-symbol"><div className="cube cube-back"></div><div className="cube cube-front"><Blocks size={58}/></div><div className="cube-glow"></div><span>BUILD YOUR<br/>OWN UNIVERSE</span></div></div></section>
 
       <section className="section faq-section" id="faq"><div className="section-heading"><div><span className="eyebrow">NEED TO KNOW</span><h2>ЧАСТЫЕ <em>ВОПРОСЫ</em></h2></div><p>Коротко о главном.</p></div><div className="faq-list">{faqs.map(([q,a],i)=><button className={'faq-item '+(faqOpen===i?'faq-active':'')} key={q} onClick={()=>setFaqOpen(faqOpen===i?-1:i)}><span className="faq-question"><b>0{i+1}</b>{q}</span><span className="faq-plus">{faqOpen===i?'−':'+'}</span>{faqOpen===i&&<p>{a}</p>}</button>)}</div></section>
 
-      <section className="final-cta"><div className="cta-stars">✦　　✧　　 ✦</div><span className="eyebrow">YOUR JOURNEY STARTS HERE</span><h2>ГОТОВ ОТКРЫТЬ<br/><em>МИР LUNARYMC?</em></h2><p>Твой профиль и возможности проекта уже ждут тебя.</p><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Регистрация на сайте</button></section>
+      <section className="final-cta"><div className="cta-stars">✦　　✧　　 ✦</div><span className="eyebrow">YOUR JOURNEY STARTS HERE</span><h2>ГОТОВ ОТКРЫТЬ<br/><em>МИР LUNARYMC?</em></h2><p>Твой профиль и возможности проекта уже ждут тебя.</p><a className="btn btn-primary" href={miniAppUrl} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={18}/></a><button className="btn btn-ghost" type="button" onClick={() => openAuth('register')}>Регистрация на сайте</button></section>
     </main>
     <footer className="footer"><a className="brand" href="#top"><span className="brand-mark"><span>✦</span></span><span>LUNARY<span className="brand-light">MC</span><small>MINECRAFT PROJECT</small></span></a><span>© {new Date().getFullYear()} LUNARYMC. НЕОФИЦИАЛЬНЫЙ ФАН-ПРОЕКТ.</span><a href={REPO_URL} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14}/></a></footer>
 
@@ -176,9 +180,9 @@ function Site() {
           <p className="auth-description">Ты вошёл в веб-аккаунт LunaryMC.</p>
           <div className="auth-account-row"><span>Логин</span><b>{authUser.username}</b></div>
           <div className="auth-account-row"><span>Регистрация</span><b>{authUser.created_at ? new Date(authUser.created_at * 1000).toLocaleDateString('ru-RU') : '—'}</b></div>
-          <p className="auth-note">Этот веб-аккаунт пока отдельный от авторизации Telegram Mini App.</p>
+          <p className="auth-note">Этот вход также откроет твой профиль в Mini App при переходе по кнопке ниже.</p>
           {authNotice && <p className="auth-notice">{authNotice}</p>}
-          <div className="auth-actions"><a className="btn btn-primary" href={APP_URL} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={16}/></a><button className="btn btn-ghost" type="button" onClick={logout}>Выйти</button></div>
+          <div className="auth-actions"><a className="btn btn-primary" href={miniAppUrl} target="_blank" rel="noreferrer">Открыть Mini App <ArrowUpRight size={16}/></a><button className="btn btn-ghost" type="button" onClick={logout}>Выйти</button></div>
         </> : <>
           <h2 id="auth-title">{authMode === 'register' ? 'Создать аккаунт' : 'С возвращением'}</h2>
           <p className="auth-description">{authMode === 'register' ? 'Зарегистрируйся на сайте LunaryMC.' : 'Войди в свой аккаунт LunaryMC.'}</p>
@@ -194,7 +198,7 @@ function Site() {
               <input type="password" value={authPassword} onChange={event => setAuthPassword(event.target.value)} autoComplete={authMode === 'register' ? 'new-password' : 'current-password'} minLength={8} maxLength={128} placeholder="Не менее 8 символов" required/>
             </label>
             <p className="auth-note">Используй отдельный пароль, не тот, который стоит на других сервисах. Восстановление пароля пока не настроено.</p>
-            {authMode === 'register' && <p className="auth-note">Сейчас это отдельный аккаунт сайта. Вход в Telegram Mini App пока остаётся отдельным.</p>}
+            {authMode === 'register' && <p className="auth-note">Твой веб-аккаунт можно использовать в Mini App через кнопку «Открыть Mini App» ниже.</p>}
             {authError && <p className="auth-error" role="alert">{authError}</p>}
             {authNotice && <p className="auth-notice">{authNotice}</p>}
             <button className="btn btn-primary auth-submit" type="submit" disabled={authBusy}>{authBusy ? 'Подключаемся…' : authMode === 'register' ? 'Зарегистрироваться' : 'Войти в аккаунт'} <ArrowUpRight size={16}/></button>
