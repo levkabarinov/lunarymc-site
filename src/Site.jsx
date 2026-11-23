@@ -173,6 +173,7 @@ function Site() {
           <a className="ecosystem-card" href="help/"><span className="ecosystem-icon">⌘</span><span className="ecosystem-status">Справочный раздел</span><h3>Lunary Help</h3><p>Полезные ссылки, ответы на вопросы и советы по безопасности.</p><span className="ecosystem-link">Открыть помощь <ArrowUpRight size={15}/></span></a>
           <a className="ecosystem-card" href="updates/"><span className="ecosystem-icon">✧</span><span className="ecosystem-status">Журнал проекта</span><h3>Lunary Updates</h3><p>Следи за опубликованными изменениями и этапами развития Lunary.</p><span className="ecosystem-link">Читать обновления <ArrowUpRight size={15}/></span></a>
           <a className="ecosystem-card" href="guide/"><span className="ecosystem-icon">📘</span><span className="ecosystem-status">Руководство</span><h3>Lunary Guide</h3><p>Краткий гид по разделам экосистемы и доступным возможностям.</p><span className="ecosystem-link">Открыть гид <ArrowUpRight size={15}/></span></a>
+          <a className="ecosystem-card" href="notes/"><span className="ecosystem-icon">📝</span><span className="ecosystem-status">Локальный инструмент</span><h3>Lunary Notes</h3><p>Сохраняй заметки и задачи прямо в браузере, ищи записи и делай резервные копии.</p><span className="ecosystem-link">Открыть Notes <ArrowUpRight size={15}/></span></a>
         </div>
       </section>
 
