@@ -5,9 +5,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Используй POST-запрос." });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return res.status(503).json({ error: "Сервер ещё не настроен: добавь GEMINI_API_KEY в переменные окружения Vercel." });
+    return res.status(503).json({ error: "Сервер ещё не настроен: добавь GROQ_API_KEY в переменные окружения Vercel." });
   }
 
   try {
@@ -24,8 +24,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: "Изображение слишком большое или имеет неподдерживаемый формат. Попробуй JPG, PNG или WebP." });
     }
 
-    const parts = [{
-      text: [
+    const prompt = [
         "Ты Lunary Solve, внимательный школьный помощник.",
         "Предмет: " + subject + ".",
         "Реши задание с изображения и/или текста. Если условие на фото нечёткое или данных недостаточно, прямо укажи, что именно не удалось прочитать, не выдумывай условие.",
@@ -34,20 +33,22 @@ export default async function handler(req, res) {
         question ? "Текст задания / распознанный текст:\n" + question : "",
         extra ? "Пожелание ученика: " + extra : ""
       ].filter(Boolean).join("\n\n")
-    }];
-    if (image) {
-      parts.push({ inlineData: { mimeType: image.mimeType, data: image.data } });
-    }
+    ].filter(Boolean).join("\\n\\n");
+    const content = [{ type: "text", text: prompt }];
+    if (image) content.push({ type: "image_url", image_url: { url: "data:" + image.mimeType + ";base64," + image.data } });
 
-    const upstream = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent", {
+    const upstream = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-goog-api-key": apiKey
+        "Authorization": "Bearer " + apiKey
       },
       body: JSON.stringify({
-        contents: [{ role: "user", parts }],
-        generationConfig: { temperature: 0.25, maxOutputTokens: 1800 }
+        model: "qwen/qwen3.8-27b",
+        messages: [{ role: "user", content }],
+        temperature: 0.25,
+        max_completion_tokens: 1800,
+        stream: false
       })
     });
 
