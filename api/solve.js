@@ -25,17 +25,22 @@ export default async function handler(req, res) {
     }
 
     const prompt = [
-        "Ты Lunary Solve, внимательный школьный помощник.",
-        "Предмет: " + subject + ".",
-        "Реши задание с изображения и/или текста. Если условие на фото нечёткое или данных недостаточно, прямо укажи, что именно не удалось прочитать, не выдумывай условие.",
-        "Дай сначала краткий ответ, затем понятное пошаговое объяснение на русском языке. Для языковых предметов объясни правило и покажи исправленный вариант; для гуманитарных предметов отделяй факты от интерпретаций; для естественных наук показывай формулы, единицы и ход решения.",
-        "Уровень объяснения: школьный, простой и точный. Не подменяй неизвестные данные догадками.",
-        question ? "Текст задания / распознанный текст:\n" + question : "",
-        extra ? "Пожелание ученика: " + extra : ""
-      ].filter(Boolean).join("\n\n")
-    ].filter(Boolean).join("\\n\\n");
-    const content = [{ type: "text", text: prompt }];
-    if (image) content.push({ type: "image_url", image_url: { url: "data:" + image.mimeType + ";base64," + image.data } });
+      "Ты Lunary Solve, внимательный школьный помощник.",
+      "Предмет: " + subject + ".",
+      "Реши задание с изображения и/или текста. Если условие на фото нечёткое или данных недостаточно, прямо укажи, что именно не удалось прочитать, не выдумывай условие.",
+      "Дай сначала краткий ответ, затем понятное пошаговое объяснение на русском языке. Для языковых предметов объясни правило и покажи исправленный вариант; для гуманитарных предметов отделяй факты от интерпретаций; для естественных наук показывай формулы, единицы и ход решения.",
+      "Уровень объяснения: школьный, простой и точный. Не подменяй неизвестные данные догадками.",
+      question ? "Текст задания / распознанный текст:\n" + question : "",
+      extra ? "Пожелание ученика: " + extra : ""
+    ].filter(Boolean).join("\n\n");
+
+    const messageContent = [{ type: "text", text: prompt }];
+    if (image) {
+      messageContent.push({
+        type: "image_url",
+        image_url: { url: "data:" + image.mimeType + ";base64," + image.data }
+      });
+    }
 
     const upstream = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -45,7 +50,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "qwen/qwen3.8-27b",
-        messages: [{ role: "user", content }],
+        messages: [{ role: "user", content: messageContent }],
         temperature: 0.25,
         max_completion_tokens: 1800,
         stream: false
@@ -56,11 +61,15 @@ export default async function handler(req, res) {
     if (!upstream.ok) {
       const message = payload?.error?.message || "Поставщик ИИ отклонил запрос.";
       const status = upstream.status === 429 ? 429 : upstream.status === 400 ? 400 : 502;
-      return res.status(status).json({ error: status === 429 ? "Лимит запросов Gemini исчерпан. Попробуй позже." : message.slice(0, 350) });
+      return res.status(status).json({
+        error: status === 429 ? "Лимит запросов Groq исчерпан. Попробуй позже." : message.slice(0, 350)
+      });
     }
 
-    const answer = (payload.candidates?.[0]?.content?.parts || []).map(p => p.text || "").join("\n").trim();
-    if (!answer) return res.status(502).json({ error: "ИИ не смог сформировать ответ. Попробуй другое фото или текст." });
+    const answer = payload.choices?.[0]?.message?.content?.trim() || "";
+    if (!answer) {
+      return res.status(502).json({ error: "ИИ не смог сформировать ответ. Попробуй другое фото или текст." });
+    }
     return res.status(200).json({ answer });
   } catch (error) {
     return res.status(500).json({ error: "Внутренняя ошибка сервера. Попробуй позже." });
