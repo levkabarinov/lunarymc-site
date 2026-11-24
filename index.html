@@ -9,7 +9,36 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <style id="lunary-unified-theme">:root{color-scheme:dark;--bg:#0a1020;--panel:#141e34;--line:#2a3958;--text:#f2f6ff;--muted:#9aa9c5;--mint:#8af0ce;--blue:#9eafff}body{background:radial-gradient(ellipse at 12% 0%,#28315e 0,transparent 35%),radial-gradient(ellipse at 100% 15%,#0c4b4a 0,transparent 28%),#0a1020!important;color:#f2f6ff!important}</style></head>
+  <style id="lunary-unified-theme">:root{color-scheme:dark;--bg:#0a1020;--panel:#141e34;--line:#2a3958;--text:#f2f6ff;--muted:#9aa9c5;--mint:#8af0ce;--blue:#9eafff}body{background:radial-gradient(ellipse at 12% 0%,#28315e 0,transparent 35%),radial-gradient(ellipse at 100% 15%,#0c4b4a 0,transparent 28%),#0a1020!important;color:#f2f6ff!important}</style><style id="lunary-emerald-theme">
+/* LUNARY ECOSYSTEM · EMERALD THEME */
+:root{
+ color-scheme:dark;
+ --bg:#0b0b10;--background:#0b0b10;--surface:#12131a;--panel:#151720;--panel2:#1c2028;
+ --line:rgba(130,220,160,.18);--border:rgba(130,220,160,.2);
+ --text:#f1f7f2;--white:#f1f7f2;--muted:#9aa99e;
+ --primary:#79d99a;--accent:#79d99a;--green:#79d99a;--mint:#a8efbd;
+ --emerald:#52c982;--violet:#9c83c9;--purple:#9c83c9;--blue:#79d99a;
+}
+html{color-scheme:dark}
+body{background-color:#0b0b10!important;color:#f1f7f2}
+button,.btn,.primary,.primary-btn,[type=submit],a.button{
+ transition:transform .18s ease,filter .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+button:active,.btn:active,.primary:active,.primary-btn:active,[type=submit]:active{transform:scale(.975)}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #79d99a!important;outline-offset:2px}
+.card,.panel,.glass,.surface,.modal,.entry-card,.quick-card,.feature-grid article{
+ border-color:rgba(130,220,160,.17)!important;
+}
+button.primary,.btn.primary,.primary-btn,[type=submit],.primary{
+ background:linear-gradient(110deg,#48bd78,#8be3a5)!important;color:#0b1710!important;
+ box-shadow:0 8px 26px rgba(72,189,120,.18);
+}
+button.secondary,.btn.secondary,.secondary-btn{
+ border-color:rgba(130,220,160,.28)!important;
+}
+a{color:#8fe2a8}
+::selection{background:#397b50;color:#fff}
+</style></head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
