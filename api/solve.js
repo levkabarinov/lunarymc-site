@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const body = req.body || {};
+    const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
     const subject = String(body.subject || "Другой предмет").slice(0, 80);
     const question = String(body.question || "").slice(0, 12000);
     const extra = String(body.extra || "").slice(0, 2000);
